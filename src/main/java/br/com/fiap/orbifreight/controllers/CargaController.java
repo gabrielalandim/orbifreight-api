@@ -12,25 +12,42 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cargas") // Define a URL base para este controller
+@RequestMapping("/cargas") // URL base para todos os endpoints desta classe
 public class CargaController {
 
     @Autowired
     private CargaService cargaService;
 
-    // POST: Usado para criar uma nova carga
+    // POST: Criar uma nova carga
     @PostMapping
     public ResponseEntity<CargaResponseDTO> criar(@Valid @RequestBody CargaRequestDTO request) {
         CargaResponseDTO response = cargaService.salvar(request);
-        // Retorna 201 Created quando o registro é inserido com sucesso
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    // GET: Usado para listar todas as cargas
+    // GET: Listar todas as cargas
     @GetMapping
     public ResponseEntity<List<CargaResponseDTO>> listar() {
         List<CargaResponseDTO> response = cargaService.listarTodas();
-        // Retorna 200 OK com a lista no corpo da requisição
         return ResponseEntity.ok(response);
+    }
+
+    // GET: Buscar carga específica por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<CargaResponseDTO> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(cargaService.buscarPorId(id));
+    }
+
+    // PUT: Atualizar carga por ID
+    @PutMapping("/{id}")
+    public ResponseEntity<CargaResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody CargaRequestDTO request) {
+        return ResponseEntity.ok(cargaService.atualizar(id, request));
+    }
+
+    // DELETE: Eliminar carga por ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        cargaService.excluir(id);
+        return ResponseEntity.noContent().build(); // Retorna o HTTP Status 204 No Content
     }
 }
