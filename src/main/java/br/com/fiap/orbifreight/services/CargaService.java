@@ -3,7 +3,9 @@ package br.com.fiap.orbifreight.services;
 import br.com.fiap.orbifreight.dtos.CargaRequestDTO;
 import br.com.fiap.orbifreight.dtos.CargaResponseDTO;
 import br.com.fiap.orbifreight.models.Carga;
+import br.com.fiap.orbifreight.models.TipoCarga;
 import br.com.fiap.orbifreight.repositories.CargaRepository;
+import br.com.fiap.orbifreight.repositories.TipoCargaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +18,17 @@ public class CargaService {
     @Autowired
     private CargaRepository cargaRepository;
 
-    // Criar nova carga (POST)
+    // Nova injeção para validar o relacionamento
+    @Autowired
+    private TipoCargaRepository tipoCargaRepository;
+
     public CargaResponseDTO salvar(CargaRequestDTO request) {
+        // Vai buscar o TipoCarga à base de dados
+        TipoCarga tipo = tipoCargaRepository.findById(request.tipoId())
+                .orElseThrow(() -> new RuntimeException("Tipo de Carga não encontrado com o ID: " + request.tipoId()));
+
         Carga carga = new Carga();
-        carga.setTipoId(request.tipoId());
+        carga.setTipoCarga(tipo); // Agora usamos o objeto completo!
         carga.setVeiculoId(request.veiculoId());
         carga.setMotoristaId(request.motoristaId());
         carga.setTempMin(request.tempMin());
@@ -31,26 +40,26 @@ public class CargaService {
         return converterParaDTO(cargaSalva);
     }
 
-    // Listar todas as cargas (GET)
     public List<CargaResponseDTO> listarTodas() {
         return cargaRepository.findAll().stream()
                 .map(this::converterParaDTO)
                 .collect(Collectors.toList());
     }
 
-    // Buscar uma carga específica pelo ID (GET)
     public CargaResponseDTO buscarPorId(Long id) {
         Carga carga = cargaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Carga não encontrada com o ID: " + id));
         return converterParaDTO(carga);
     }
 
-    // Atualizar os dados de uma carga existente (PUT)
     public CargaResponseDTO atualizar(Long id, CargaRequestDTO request) {
         Carga carga = cargaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Carga não encontrada com o ID: " + id));
 
-        carga.setTipoId(request.tipoId());
+        TipoCarga tipo = tipoCargaRepository.findById(request.tipoId())
+                .orElseThrow(() -> new RuntimeException("Tipo de Carga não encontrado com o ID: " + request.tipoId()));
+
+        carga.setTipoCarga(tipo);
         carga.setVeiculoId(request.veiculoId());
         carga.setMotoristaId(request.motoristaId());
         carga.setTempMin(request.tempMin());
@@ -62,7 +71,6 @@ public class CargaService {
         return converterParaDTO(cargaAtualizada);
     }
 
-    // Eliminar uma carga (DELETE)
     public void excluir(Long id) {
         if (!cargaRepository.existsById(id)) {
             throw new RuntimeException("Carga não encontrada com o ID: " + id);
@@ -73,7 +81,7 @@ public class CargaService {
     private CargaResponseDTO converterParaDTO(Carga carga) {
         return new CargaResponseDTO(
                 carga.getId(),
-                carga.getTipoId(),
+                carga.getTipoCarga().getId(), // Extrai o ID para devolver no DTO
                 carga.getVeiculoId(),
                 carga.getMotoristaId(),
                 carga.getTempMin(),

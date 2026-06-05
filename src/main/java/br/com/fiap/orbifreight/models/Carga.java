@@ -17,10 +17,10 @@ public class Carga {
     @Column(name = "id")
     private Long id;
 
-    // Os relacionamentos oficiais (@ManyToOne) faremos depois,
-    // por enquanto deixamos os IDs diretos para facilitar o CRUD inicial.
-    @Column(name = "tipo_id", nullable = false)
-    private Long tipoId;
+    // Substituímos o tipoId pelo relacionamento @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tipo_id", nullable = false)
+    private TipoCarga tipoCarga;
 
     @Column(name = "veiculo_id", nullable = false)
     private Long veiculoId;
