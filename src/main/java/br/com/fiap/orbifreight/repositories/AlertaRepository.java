@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AlertaRepository extends JpaRepository<Alerta, Long> {
+
+    long countByStatus(String status);
+
+    long countByNivelAndStatus(String nivel, String status);
 }

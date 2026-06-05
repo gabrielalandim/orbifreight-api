@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CargaRepository extends JpaRepository<Carga, Long> {
 
+    long countByStatus(String status);
 }
