@@ -18,19 +18,20 @@ public class CargaService {
     @Autowired
     private CargaRepository cargaRepository;
 
-    // Nova injeção para validar o relacionamento
     @Autowired
     private TipoCargaRepository tipoCargaRepository;
 
     public CargaResponseDTO salvar(CargaRequestDTO request) {
-        // Vai buscar o TipoCarga à base de dados
         TipoCarga tipo = tipoCargaRepository.findById(request.tipoId())
                 .orElseThrow(() -> new RuntimeException("Tipo de Carga não encontrado com o ID: " + request.tipoId()));
 
         Carga carga = new Carga();
-        carga.setTipoCarga(tipo); // Agora usamos o objeto completo!
+        carga.setTipoCarga(tipo);
         carga.setVeiculoId(request.veiculoId());
         carga.setMotoristaId(request.motoristaId());
+        carga.setPlacaVeiculo(request.placaVeiculo()); // 🟢 SALVA A PLACA
+        carga.setOrigem(request.origem());
+        carga.setDestino(request.destino());
         carga.setTempMin(request.tempMin());
         carga.setTempMax(request.tempMax());
         carga.setUmidadeMax(request.umidadeMax());
@@ -49,6 +50,7 @@ public class CargaService {
     public CargaResponseDTO buscarPorId(Long id) {
         Carga carga = cargaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Carga não encontrada com o ID: " + id));
+
         return converterParaDTO(carga);
     }
 
@@ -62,6 +64,9 @@ public class CargaService {
         carga.setTipoCarga(tipo);
         carga.setVeiculoId(request.veiculoId());
         carga.setMotoristaId(request.motoristaId());
+        carga.setPlacaVeiculo(request.placaVeiculo()); // 🟢 ATUALIZA A PLACA
+        carga.setOrigem(request.origem());
+        carga.setDestino(request.destino());
         carga.setTempMin(request.tempMin());
         carga.setTempMax(request.tempMax());
         carga.setUmidadeMax(request.umidadeMax());
@@ -79,15 +84,19 @@ public class CargaService {
     }
 
     private CargaResponseDTO converterParaDTO(Carga carga) {
+        // 🟢 ORDEM E TIPAGEM ALINHADAS 100% COM O RECORD DTO
         return new CargaResponseDTO(
                 carga.getId(),
-                carga.getTipoCarga().getId(), // Extrai o ID para devolver no DTO
+                carga.getTipoCarga().getId(),
                 carga.getVeiculoId(),
                 carga.getMotoristaId(),
-                carga.getTempMin(),
-                carga.getTempMax(),
-                carga.getUmidadeMax(),
-                carga.getStatus()
+                carga.getPlacaVeiculo(), // 5. String
+                carga.getOrigem(),       // 6. String
+                carga.getDestino(),      // 7. String
+                carga.getTempMin(),      // 8. Double
+                carga.getTempMax(),      // 9. Double
+                carga.getUmidadeMax(),   // 10. Double
+                carga.getStatus()        // 11. String
         );
     }
 }

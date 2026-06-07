@@ -8,6 +8,7 @@ import br.com.fiap.orbifreight.repositories.AlertaRepository;
 import br.com.fiap.orbifreight.repositories.CargaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ public class AlertaService {
     @Autowired
     private CargaRepository cargaRepository;
 
+    @Transactional
     public AlertaResponseDTO salvar(AlertaRequestDTO request) {
         Carga carga = cargaRepository.findById(request.cargaId())
                 .orElseThrow(() -> new RuntimeException("Carga não encontrada com o ID: " + request.cargaId()));
@@ -47,7 +49,7 @@ public class AlertaService {
                 .orElseThrow(() -> new RuntimeException("Alerta não encontrado com o ID: " + id));
         return converterParaDTO(alerta);
     }
-
+    @Transactional
     public AlertaResponseDTO atualizar(Long id, AlertaRequestDTO request) {
         Alerta alerta = alertaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Alerta não encontrado com o ID: " + id));
