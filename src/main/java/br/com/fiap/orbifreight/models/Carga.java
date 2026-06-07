@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "CARGA")
 @Data
@@ -48,4 +50,8 @@ public class Carga {
 
     @Column(name = "status", nullable = false, length = 50)
     private String status;
+
+    // Isso avisa ao banco: "Pode apagar os alertas históricos junto com a carga!"
+    @OneToMany(mappedBy = "carga", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Alerta> alertas;
 }
