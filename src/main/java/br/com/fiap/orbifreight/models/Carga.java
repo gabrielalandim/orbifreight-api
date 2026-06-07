@@ -17,7 +17,6 @@ public class Carga {
     @Column(name = "id")
     private Long id;
 
-    // Substituímos o tipoId pelo relacionamento @ManyToOne
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_id", nullable = false)
     private TipoCarga tipoCarga;
@@ -27,6 +26,16 @@ public class Carga {
 
     @Column(name = "motorista_id", nullable = false)
     private Long motoristaId;
+
+    // 🟢 NOVA COLUNA PARA A PLACA
+    @Column(name = "placa_veiculo", length = 10, nullable = false)
+    private String placaVeiculo;
+
+    @Column(name = "origem", length = 150, nullable = false)
+    private String origem;
+
+    @Column(name = "destino", length = 150, nullable = false)
+    private String destino;
 
     @Column(name = "temp_min", nullable = false)
     private Double tempMin;

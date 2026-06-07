@@ -14,6 +14,16 @@ public record CargaRequestDTO(
         @NotNull(message = "O ID do motorista é obrigatório")
         Long motoristaId,
 
+        // 🟢 ADICIONADO: Validação da Placa do Veículo
+        @NotBlank(message = "A placa do veículo é obrigatória")
+        String placaVeiculo,
+
+        @NotBlank(message = "O ponto de origem é obrigatório")
+        String origem,
+
+        @NotBlank(message = "O ponto de destino é obrigatório")
+        String destino,
+
         @NotNull(message = "A temperatura mínima é obrigatória")
         Double tempMin,
 
