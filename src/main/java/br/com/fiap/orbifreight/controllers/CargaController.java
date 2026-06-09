@@ -4,50 +4,73 @@ import br.com.fiap.orbifreight.dtos.CargaRequestDTO;
 import br.com.fiap.orbifreight.dtos.CargaResponseDTO;
 import br.com.fiap.orbifreight.services.CargaService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
-@RequestMapping("/cargas") // URL base para todos os endpoints desta classe
+@RequestMapping("/cargas")
+@RequiredArgsConstructor
 public class CargaController {
 
-    @Autowired
-    private CargaService cargaService;
+    private final CargaService cargaService;
 
-    // POST: Criar uma nova carga
-    @PostMapping
-    public ResponseEntity<CargaResponseDTO> criar(@Valid @RequestBody CargaRequestDTO request) {
-        CargaResponseDTO response = cargaService.salvar(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }
-
-    // GET: Listar todas as cargas
-    @GetMapping
-    public ResponseEntity<List<CargaResponseDTO>> listar() {
-        List<CargaResponseDTO> response = cargaService.listarTodas();
-        return ResponseEntity.ok(response);
-    }
-
-    // GET: Buscar carga específica por ID
     @GetMapping("/{id}")
-    public ResponseEntity<CargaResponseDTO> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(cargaService.buscarPorId(id));
+    public ResponseEntity<EntityModel<CargaResponseDTO>> buscarPorId(@PathVariable Long id) {
+        CargaResponseDTO carga = cargaService.buscarPorId(id);
+
+        EntityModel<CargaResponseDTO> model = EntityModel.of(carga);
+        model.add(linkTo(methodOn(CargaController.class).buscarPorId(id)).withSelfRel());
+        model.add(linkTo(methodOn(CargaController.class).listarTodas()).withRel("cargas"));
+
+        return ResponseEntity.ok(model);
     }
 
-    // PUT: Atualizar carga por ID
+    @GetMapping
+    public ResponseEntity<CollectionModel<EntityModel<CargaResponseDTO>>> listarTodas() {
+        List<EntityModel<CargaResponseDTO>> cargas = cargaService.listarTodas().stream()
+                .map(carga -> EntityModel.of(carga,
+                        linkTo(methodOn(CargaController.class).buscarPorId(carga.id())).withSelfRel()))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(CollectionModel.of(cargas,
+                linkTo(methodOn(CargaController.class).listarTodas()).withSelfRel()));
+    }
+
+    @PostMapping
+    public ResponseEntity<EntityModel<CargaResponseDTO>> salvar(@Valid @RequestBody CargaRequestDTO request) {
+        CargaResponseDTO carga = cargaService.salvar(request);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(carga.id()).toUri();
+
+        EntityModel<CargaResponseDTO> model = EntityModel.of(carga);
+        model.add(linkTo(methodOn(CargaController.class).buscarPorId(carga.id())).withSelfRel());
+
+        return ResponseEntity.created(uri).body(model);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<CargaResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody CargaRequestDTO request) {
-        return ResponseEntity.ok(cargaService.atualizar(id, request));
+    public ResponseEntity<EntityModel<CargaResponseDTO>> atualizar(@PathVariable Long id, @Valid @RequestBody CargaRequestDTO request) {
+        CargaResponseDTO carga = cargaService.atualizar(id, request);
+
+        EntityModel<CargaResponseDTO> model = EntityModel.of(carga);
+        model.add(linkTo(methodOn(CargaController.class).buscarPorId(id)).withSelfRel());
+
+        return ResponseEntity.ok(model);
     }
 
-    // DELETE: Eliminar carga por ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         cargaService.excluir(id);
-        return ResponseEntity.noContent().build(); // Retorna o HTTP Status 204 No Content
+        return ResponseEntity.noContent().build();
     }
 }
