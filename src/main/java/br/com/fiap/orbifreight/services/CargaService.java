@@ -2,101 +2,93 @@ package br.com.fiap.orbifreight.services;
 
 import br.com.fiap.orbifreight.dtos.CargaRequestDTO;
 import br.com.fiap.orbifreight.dtos.CargaResponseDTO;
+import br.com.fiap.orbifreight.exceptions.ResourceNotFoundException;
 import br.com.fiap.orbifreight.models.Carga;
 import br.com.fiap.orbifreight.models.TipoCarga;
 import br.com.fiap.orbifreight.repositories.CargaRepository;
 import br.com.fiap.orbifreight.repositories.TipoCargaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CargaService {
 
-    @Autowired
-    private CargaRepository cargaRepository;
+    private final CargaRepository cargaRepository;
+    private final TipoCargaRepository tipoCargaRepository;
 
-    @Autowired
-    private TipoCargaRepository tipoCargaRepository;
-
+    @Transactional
     public CargaResponseDTO salvar(CargaRequestDTO request) {
         TipoCarga tipo = tipoCargaRepository.findById(request.tipoId())
-                .orElseThrow(() -> new RuntimeException("Tipo de Carga não encontrado com o ID: " + request.tipoId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Tipo de Carga não encontrado: " + request.tipoId()));
 
         Carga carga = new Carga();
-        carga.setTipoCarga(tipo);
-        carga.setVeiculoId(request.veiculoId());
-        carga.setMotoristaId(request.motoristaId());
-        carga.setPlacaVeiculo(request.placaVeiculo()); // 🟢 SALVA A PLACA
-        carga.setOrigem(request.origem());
-        carga.setDestino(request.destino());
-        carga.setTempMin(request.tempMin());
-        carga.setTempMax(request.tempMax());
-        carga.setUmidadeMax(request.umidadeMax());
-        carga.setStatus(request.status());
+        preencherDados(carga, request, tipo);
 
-        Carga cargaSalva = cargaRepository.save(carga);
-        return converterParaDTO(cargaSalva);
+        return converterParaDTO(cargaRepository.save(carga));
     }
 
     public List<CargaResponseDTO> listarTodas() {
         return cargaRepository.findAll().stream()
                 .map(this::converterParaDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public CargaResponseDTO buscarPorId(Long id) {
-        Carga carga = cargaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Carga não encontrada com o ID: " + id));
-
-        return converterParaDTO(carga);
+        return cargaRepository.findById(id)
+                .map(this::converterParaDTO)
+                .orElseThrow(() -> new ResourceNotFoundException("Carga não encontrada com o ID: " + id));
     }
 
+    @Transactional
     public CargaResponseDTO atualizar(Long id, CargaRequestDTO request) {
         Carga carga = cargaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Carga não encontrada com o ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Carga não encontrada com o ID: " + id));
 
         TipoCarga tipo = tipoCargaRepository.findById(request.tipoId())
-                .orElseThrow(() -> new RuntimeException("Tipo de Carga não encontrado com o ID: " + request.tipoId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Tipo de Carga não encontrado: " + request.tipoId()));
 
+        preencherDados(carga, request, tipo);
+        return converterParaDTO(cargaRepository.save(carga));
+    }
+
+    @Transactional
+    public void excluir(Long id) {
+        if (!cargaRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Carga não encontrada com o ID: " + id);
+        }
+        cargaRepository.deleteById(id);
+    }
+
+    private void preencherDados(Carga carga, CargaRequestDTO request, TipoCarga tipo) {
         carga.setTipoCarga(tipo);
         carga.setVeiculoId(request.veiculoId());
         carga.setMotoristaId(request.motoristaId());
-        carga.setPlacaVeiculo(request.placaVeiculo()); // 🟢 ATUALIZA A PLACA
+        carga.setPlacaVeiculo(request.placaVeiculo());
         carga.setOrigem(request.origem());
         carga.setDestino(request.destino());
         carga.setTempMin(request.tempMin());
         carga.setTempMax(request.tempMax());
         carga.setUmidadeMax(request.umidadeMax());
         carga.setStatus(request.status());
-
-        Carga cargaAtualizada = cargaRepository.save(carga);
-        return converterParaDTO(cargaAtualizada);
-    }
-
-    public void excluir(Long id) {
-        if (!cargaRepository.existsById(id)) {
-            throw new RuntimeException("Carga não encontrada com o ID: " + id);
-        }
-        cargaRepository.deleteById(id);
     }
 
     private CargaResponseDTO converterParaDTO(Carga carga) {
-        // 🟢 ORDEM E TIPAGEM ALINHADAS 100% COM O RECORD DTO
         return new CargaResponseDTO(
                 carga.getId(),
                 carga.getTipoCarga().getId(),
                 carga.getVeiculoId(),
                 carga.getMotoristaId(),
-                carga.getPlacaVeiculo(), // 5. String
-                carga.getOrigem(),       // 6. String
-                carga.getDestino(),      // 7. String
-                carga.getTempMin(),      // 8. Double
-                carga.getTempMax(),      // 9. Double
-                carga.getUmidadeMax(),   // 10. Double
-                carga.getStatus()        // 11. String
+                carga.getPlacaVeiculo(),
+                carga.getOrigem(),
+                carga.getDestino(),
+                carga.getTempMin(),
+                carga.getTempMax(),
+                carga.getUmidadeMax(),
+                carga.getStatus()
         );
     }
 }
