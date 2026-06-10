@@ -1,11 +1,9 @@
-<div align="center">
-
-<img src="https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
-<img src="https://img.shields.io/badge/Spring_Boot-3.3.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/>
-<img src="https://img.shields.io/badge/Spring_Security-JWT-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white"/>
-<img src="https://img.shields.io/badge/Oracle-DB-F80000?style=for-the-badge&logo=oracle&logoColor=white"/>
-<img src="https://img.shields.io/badge/Azure-Deploy-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white"/>
-<img src="https://img.shields.io/badge/Swagger-OpenAPI_3-85EA2D?style=for-the-badge&logo=swagger&logoColor=black"/>
+[![Java](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://openjdk.org/projects/jdk/17/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.3.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Spring Security](https://img.shields.io/badge/Spring_Security-JWT-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white)](https://spring.io/projects/spring-security)
+[![Oracle DB](https://img.shields.io/badge/Oracle-DB-F80000?style=for-the-badge&logo=oracle&logoColor=white)](https://www.oracle.com/database/)
+[![Azure](https://img.shields.io/badge/Azure-Deploy-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
+[![Swagger](https://img.shields.io/badge/Swagger-OpenAPI_3-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://swagger.io/)
 
 # 🛰️ Orbifreight API
 
@@ -16,29 +14,31 @@
 
 ---
 
-</div>
-
 ## 🔗 Links Oficiais do Projeto
 
 | Recurso | Link |
 |---|---|
-| 🚀 **Deploy (API em produção)** | [https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net](https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net) |
-| 📖 **Documentação Swagger/OpenAPI** | [https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/swagger-ui/index.html](https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/swagger-ui/index.html) |
-| 🎬 **Vídeo Pitch (3 minutos)** | [https://youtu.be/lgvnZS5-yeg](https://youtu.be/lgvnZS5-yeg) |
-| 🎥 **Vídeo de Apresentação (10 minutos)** | [https://youtu.be/-CYGdHebzt8?si=DAfZRWNAL8H0eaQq](https://youtu.be/-CYGdHebzt8?si=DAfZRWNAL8H0eaQq) |
-| 💻 **Repositório GitHub** | [https://github.com/gabrielalandim/orbifreight-api](https://github.com/gabrielalandim/orbifreight-api) |
+| 🚀 **Deploy (API em produção)** | https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net |
+| 📖 **Documentação da API (Swagger/OpenAPI)** | https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/swagger-ui/index.html |
+| 🎬 **Vídeo Pitch (3 minutos)** | https://youtu.be/lgvnZS5-yeg |
+| 🎥 **Vídeo de Apresentação (10 minutos)** | https://youtu.be/-CYGdHebzt8?si=DAfZRWNAL8H0eaQq |
+| 💻 **Repositório GitHub** | https://github.com/gabrielalandim/orbifreight-api |
 
 ---
 
 ## 📋 Sumário
 
 - [Sobre o Projeto](#-sobre-o-projeto)
-- [Arquitetura](#-arquitetura-do-sistema)
-- [Tecnologias](#-tecnologias-utilizadas)
-- [Modelagem de Dados](#-modelagem-de-dados-der)
+- [Arquitetura](#️-arquitetura-do-sistema)
+- [Tecnologias](#️-tecnologias-utilizadas)
+- [Modelagem de Dados](#️-modelagem-de-dados-der)
 - [Endpoints da API](#-endpoints-da-api)
+- [HTTP Status Codes](#-http-status-codes)
+- [Java Records e DTOs](#-java-records-e-dtos)
 - [Segurança — JWT](#-segurança--autenticação-jwt)
-- [Como Executar Localmente](#-como-executar-localmente)
+- [Configuração de CORS](#-configuração-de-cors)
+- [Documentação da API (Swagger)](#-documentação-da-api-swagger)
+- [Como Executar Localmente](#️-como-executar-localmente)
 - [Integrantes](#-integrantes)
 
 ---
@@ -140,16 +140,18 @@ graph TB
 | Linguagem | Java | 17 |
 | Framework Principal | Spring Boot | 3.3.5 |
 | Persistência | Spring Data JPA + Hibernate | 3.3.5 |
-| Segurança | Spring Security + JWT (Auth0) | 4.4.0 |
+| Segurança | Spring Security | 6.3.4 |
+| Autenticação | JWT (Auth0 java-jwt) | 4.4.0 |
 | Documentação | SpringDoc OpenAPI / Swagger UI | 2.6.0 |
 | Banco de Dados (Prod) | Oracle Database | 19c+ |
-| Banco de Dados (Dev/Test) | H2 in-memory | — |
+| Banco de Dados (Dev/Test) | H2 in-memory | 2.2.224 |
 | Build | Maven | 3.9+ |
-| Produtividade | Lombok + DevTools | — |
-| HATEOAS | Spring HATEOAS | — |
+| Produtividade | Lombok | 1.18.34 |
+| Produtividade | Spring Boot DevTools | 3.3.5 |
+| HATEOAS | Spring HATEOAS | 2.3.2 |
 | Cloud | Microsoft Azure App Service | — |
-| Comunicação HTTP | OpenFeign (Spring Cloud) | — |
-| Validação | Spring Validation (Jakarta) | — |
+| Comunicação HTTP | OpenFeign (Spring Cloud) | 4.1.3 |
+| Validação | Spring Validation (Jakarta) | 3.3.5 |
 
 ---
 
@@ -240,49 +242,108 @@ erDiagram
 ## 📡 Endpoints da API
 
 ### 🔑 Autenticação — `/auth`
-| Método | Endpoint | Descrição | Auth? |
-|---|---|---|---|
-| POST | `/auth/register` | Registra novo usuário | ❌ |
-| POST | `/auth/login` | Login e retorna token JWT | ❌ |
+
+| Método | Endpoint | Descrição | Auth? | Status |
+|---|---|---|---|---|
+| POST | `/auth/register` | Registra novo usuário | ❌ | `201 Created` |
+| POST | `/auth/login` | Login e retorna token JWT | ❌ | `200 OK` |
 
 ### 📦 Cargas — `/cargas`
-| Método | Endpoint | Descrição | Auth? |
-|---|---|---|---|
-| GET | `/cargas` | Lista todas as cargas | ✅ |
-| GET | `/cargas/{id}` | Busca carga por ID | ✅ |
-| POST | `/cargas` | Cria nova carga | ✅ |
-| PUT | `/cargas/{id}` | Atualiza carga existente | ✅ |
-| DELETE | `/cargas/{id}` | Remove carga | ✅ |
+
+| Método | Endpoint | Descrição | Auth? | Status |
+|---|---|---|---|---|
+| GET | `/cargas` | Lista todas as cargas | ✅ | `200 OK` |
+| GET | `/cargas/{id}` | Busca carga por ID | ✅ | `200 OK` / `404 Not Found` |
+| POST | `/cargas` | Cria nova carga | ✅ | `201 Created` |
+| PUT | `/cargas/{id}` | Atualiza carga existente | ✅ | `200 OK` / `404 Not Found` |
+| DELETE | `/cargas/{id}` | Remove carga | ✅ | `204 No Content` / `404 Not Found` |
 
 ### 🚨 Alertas — `/alertas`
-| Método | Endpoint | Descrição | Auth? |
-|---|---|---|---|
-| GET | `/alertas` | Lista todos os alertas | ✅ |
-| GET | `/alertas/{id}` | Busca alerta por ID | ✅ |
-| POST | `/alertas` | Cria novo alerta | ✅ |
-| PUT | `/alertas/{id}` | Atualiza alerta | ✅ |
-| DELETE | `/alertas/{id}` | Remove alerta | ✅ |
+
+| Método | Endpoint | Descrição | Auth? | Status |
+|---|---|---|---|---|
+| GET | `/alertas` | Lista todos os alertas | ✅ | `200 OK` |
+| GET | `/alertas/{id}` | Busca alerta por ID | ✅ | `200 OK` / `404 Not Found` |
+| POST | `/alertas` | Cria novo alerta | ✅ | `201 Created` |
+| PUT | `/alertas/{id}` | Atualiza alerta | ✅ | `200 OK` / `404 Not Found` |
+| DELETE | `/alertas/{id}` | Remove alerta | ✅ | `204 No Content` / `404 Not Found` |
 
 ### 🏷️ Tipos de Carga — `/tipos-carga`
-| Método | Endpoint | Descrição | Auth? |
-|---|---|---|---|
-| GET | `/tipos-carga` | Lista tipos de carga | ✅ |
-| GET | `/tipos-carga/{id}` | Busca tipo por ID | ✅ |
-| POST | `/tipos-carga` | Cria tipo de carga | ✅ |
-| PUT | `/tipos-carga/{id}` | Atualiza tipo de carga | ✅ |
-| DELETE | `/tipos-carga/{id}` | Remove tipo de carga | ✅ |
+
+| Método | Endpoint | Descrição | Auth? | Status |
+|---|---|---|---|---|
+| GET | `/tipos-carga` | Lista tipos de carga | ✅ | `200 OK` |
+| GET | `/tipos-carga/{id}` | Busca tipo por ID | ✅ | `200 OK` / `404 Not Found` |
+| POST | `/tipos-carga` | Cria tipo de carga | ✅ | `201 Created` |
+| PUT | `/tipos-carga/{id}` | Atualiza tipo de carga | ✅ | `200 OK` / `404 Not Found` |
+| DELETE | `/tipos-carga/{id}` | Remove tipo de carga | ✅ | `204 No Content` / `404 Not Found` |
 
 ### 📊 Dashboard — `/dashboard`
-| Método | Endpoint | Descrição | Auth? |
-|---|---|---|---|
-| GET | `/dashboard` | Estatísticas gerais (cargas, alertas) | ✅ |
+
+| Método | Endpoint | Descrição | Auth? | Status |
+|---|---|---|---|---|
+| GET | `/dashboard` | Estatísticas gerais (cargas, alertas) | ✅ | `200 OK` |
 
 ### 🌡️ IoT — `/api/iot`
-| Método | Endpoint | Descrição | Auth? |
-|---|---|---|---|
-| POST | `/api/iot/leituras` | Recebe telemetria de sensor embarcado | ✅ |
+
+| Método | Endpoint | Descrição | Auth? | Status |
+|---|---|---|---|---|
+| POST | `/api/iot/leituras` | Recebe telemetria de sensor embarcado | ✅ | `201 Created` |
 
 > Todos os endpoints protegidos retornam links HATEOAS para navegação da API.
+
+---
+
+## 📊 HTTP Status Codes
+
+A API retorna os seguintes status codes de forma padronizada:
+
+| Código | Significado | Quando é usado |
+|---|---|---|
+| `200 OK` | Sucesso | GET, PUT bem-sucedidos |
+| `201 Created` | Recurso criado | POST bem-sucedido |
+| `204 No Content` | Sem conteúdo | DELETE bem-sucedido |
+| `400 Bad Request` | Requisição inválida | Dados de entrada com violação de validação |
+| `401 Unauthorized` | Não autenticado | Token JWT ausente ou inválido |
+| `403 Forbidden` | Acesso negado | Usuário sem permissão para o recurso |
+| `404 Not Found` | Recurso não encontrado | ID inexistente no banco |
+| `409 Conflict` | Conflito | E-mail já cadastrado no registro |
+| `500 Internal Server Error` | Erro do servidor | Erros inesperados (mapeados via GlobalExceptionHandler) |
+
+As exceções são tratadas de forma centralizada pelo `GlobalExceptionHandler`, retornando respostas padronizadas com mensagem e timestamp.
+
+---
+
+## 🗂️ Java Records e DTOs
+
+A API utiliza **Java Records** para transferência de dados entre as camadas, garantindo imutabilidade e redução de boilerplate:
+
+```java
+// Exemplo — Record para requisição de login
+public record LoginRequestDTO(String email, String senha) {}
+
+// Exemplo — Record para resposta de login
+public record LoginResponseDTO(String token, Long id, String nome) {}
+
+// Exemplo — Record para criação de carga
+public record CargaRequestDTO(
+    Long tipoId,
+    String placaVeiculo,
+    String origem,
+    String destino,
+    Double tempMin,
+    Double tempMax,
+    Double umidadeMax
+) {}
+```
+
+| DTO / Record | Tipo | Localização |
+|---|---|---|
+| `LoginRequestDTO` | Java Record | `dto/LoginRequestDTO.java` |
+| `LoginResponseDTO` | Java Record | `dto/LoginResponseDTO.java` |
+| `CargaRequestDTO` | Java Record | `dto/CargaRequestDTO.java` |
+| `AlertaRequestDTO` | Java Record | `dto/AlertaRequestDTO.java` |
+| `TipoCargaRequestDTO` | Java Record | `dto/TipoCargaRequestDTO.java` |
 
 ---
 
@@ -305,9 +366,46 @@ O fluxo de autenticação segue o padrão **Stateless JWT**:
 
 ---
 
+## 🌐 Configuração de CORS
+
+A API possui CORS configurado para permitir acesso externo em ambiente de produção. A configuração está definida em `config/CorsConfig.java` e na classe `SecurityConfig`:
+
+```java
+// Trecho da configuração em SecurityConfig.java
+@Bean
+public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(List.of("*"));
+    configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+    configuration.setAllowedHeaders(List.of("*"));
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
+}
+```
+
+> CORS habilitado para todos os origins em ambiente de desenvolvimento/testes. Em produção, restringir para domínios específicos.
+
+---
+
+## 📖 Documentação da API (Swagger)
+
+A documentação interativa completa da API está disponível via **Swagger UI / OpenAPI 3**:
+
+🔗 **Acesse:** https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/swagger-ui/index.html
+
+Pela interface do Swagger é possível:
+- Visualizar todos os endpoints com descrições e parâmetros
+- Autenticar com token JWT clicando em **Authorize**
+- Executar requisições diretamente pelo browser
+- Baixar a especificação OpenAPI em formato JSON/YAML
+
+---
+
 ## ▶️ Como Executar Localmente
 
 ### Pré-requisitos
+
 - Java 17+
 - Maven 3.9+
 - (Opcional) Oracle Database — o projeto usa H2 por padrão em perfil local
@@ -328,7 +426,7 @@ cd orbifreight-api
 
 ### Variáveis de Ambiente (Produção Oracle)
 
-```properties
+```env
 SPRING_DATASOURCE_URL=jdbc:oracle:thin:@<host>:1521/<service>
 SPRING_DATASOURCE_USERNAME=seu_usuario
 SPRING_DATASOURCE_PASSWORD=sua_senha
@@ -374,18 +472,14 @@ Authorization: Bearer <token>
 
 ## 👩‍💻 Integrantes
 
-| Nome | RM | Turma  |
-|---|---|--------|
-| Maria Gabriela Landim Severo | RM565146 | 2TDSR  |
-| Eduarda Weiss Ventura | RM564434 | 2TDPX  |
-| Samara Porto Souza | RM559072 | 2TDSR  |
+| Nome | RM | Turma |
+|---|---|---|
+| Maria Gabriela Landim Severo | RM565146 | 2TDSR |
+| Eduarda Weiss Ventura | RM564434 | 2TDPX |
+| Samara Porto Souza | RM559072 | 2TDSR |
 | Lucas Nunes Soares | RM566503 | 2TDSPX |
 | Camilly Vitoria Pereira Maciel | RM566520 | 2TDSPX |
 
 ---
 
-<div align="center">
-
 **Global Solution 2026 — Java Advanced | FIAP**
-
-</div>
