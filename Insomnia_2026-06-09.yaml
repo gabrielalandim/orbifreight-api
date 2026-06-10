@@ -1,0 +1,482 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: OrbiFreight - API
+meta:
+  id: wrk_7031cfd4b1394b2f8eabd0c9e2c20629
+  created: 1781019491128
+  modified: 1781019491128
+  description: ""
+collection:
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/auth/register
+    name: "Register "
+    meta:
+      id: req_b7f7f69913314637bccfc33048cb2058
+      created: 1781019531999
+      modified: 1781050078360
+      isPrivate: false
+      description: ""
+      sortKey: -1781019531999
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "nome": "Mariana Eduarda",
+          "email": "mari11a@orbifreight.com",
+          "senha": "senhaforte123",
+          "cargo": "Administradora",
+          "tipoUsuario": "GESTOR"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/auth/login
+    name: Login
+    meta:
+      id: req_13be115391bf4c77be63fa664ada3fd4
+      created: 1781020279419
+      modified: 1781050113253
+      isPrivate: false
+      description: ""
+      sortKey: -1781020279419
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "email": "mari11a@orbifreight.com",
+          "senha": "senhaforte123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/tipos-carga
+    name: TipoCarga
+    meta:
+      id: req_a2e274ba69534394b53a38041c92edef
+      created: 1781022997860
+      modified: 1781050423968
+      isPrivate: false
+      description: ""
+      sortKey: -1781022997860
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "nome": "Farmacêutico Refrigerado",
+          "tempMin": 2.0,
+          "tempMax": 8.0,
+          "umidadeMax": 60.0,
+          "prazoMaxHoras": 48
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/cargas
+    name: Cargas
+    meta:
+      id: req_355afd5635914868bae26f3f877dee64
+      created: 1781023070184
+      modified: 1781050556937
+      isPrivate: false
+      description: ""
+      sortKey: -1781023070184
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "origem": "São Paulo, SP",
+          "destino": "Rio de Janeiro, RJ",
+          "placaVeiculo": "ABC-1234",
+          "status": "EM_TRANSITO",
+          "tempMax": 8.0,
+          "tempMin": 2.0,
+          "umidadeMax": 60.0,
+          "motoristaId": 1,
+          "veiculoId": 1,
+          "tipoId": 2
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/cargas/9999
+    name: "Tratamento Global de Exceções "
+    meta:
+      id: req_e259b74010c148419324b5d2408b5d0c
+      created: 1781023128997
+      modified: 1781045208631
+      isPrivate: false
+      description: ""
+      sortKey: -1781023128997
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/dashboard
+    name: Dashboard
+    meta:
+      id: req_74eb2e6638b5420ca4cf3c5cc9d8ff19
+      created: 1781023194732
+      modified: 1781045456041
+      isPrivate: false
+      description: ""
+      sortKey: -1781023194732
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/cargas/3
+    name: Atualizar Carga
+    meta:
+      id: req_5bb594bffcbb49eb83df7cff5d5a9af2
+      created: 1781023414982
+      modified: 1781050818602
+      isPrivate: false
+      description: ""
+      sortKey: -1781023414982
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "origem": "São Paulo, SP",
+          "destino": "Rio de Janeiro, RJ", 
+          "placaVeiculo": "ABC-1234",
+          "status": "ATIVA", 
+          "tempMax": 8.0,
+          "tempMin": 2.0,
+          "umidadeMax": 60.0,
+          "motoristaId": 1,
+          "veiculoId": 1,
+          "tipoId": 2
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/tipos-carga/1
+    name: Atualizar Tipo Carga
+    meta:
+      id: req_22bc9436f82e4c6885443326352f036a
+      created: 1781023477787
+      modified: 1781045768139
+      isPrivate: false
+      description: ""
+      sortKey: -1781023477787
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "nome": "Medicamentos Termolábeis (Atualizado)",
+          "prazoMaxHoras": 72,
+          "tempMax": 10.0,
+          "tempMin": 2.0,
+          "umidadeMax": 65.0
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/cargas/3
+    name: Deletar Carga
+    meta:
+      id: req_64b2ee79dff44d1fa8654d1ac510726b
+      created: 1781023552112
+      modified: 1781050853359
+      isPrivate: false
+      description: ""
+      sortKey: -1781023552112
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/tipos-carga/1
+    name: Deletar Tipo Carga
+    meta:
+      id: req_8778bcc5eba8462eac45a4dcabc42496
+      created: 1781023608728
+      modified: 1781046475600
+      isPrivate: false
+      description: ""
+      sortKey: -1781023608728
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/cargas/3
+    name: Teste Carga Deletada
+    meta:
+      id: req_ccc3b1e2bd914fd0b75398d1af205f9d
+      created: 1781023671575
+      modified: 1781050873462
+      isPrivate: false
+      description: ""
+      sortKey: -1781023671575
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/api/iot/leituras
+    name: POST Leitura IoT
+    meta:
+      id: req_43312c65a2454914abe10e21a4931e57
+      created: 1781024490302
+      modified: 1781051217356
+      isPrivate: false
+      description: ""
+      sortKey: -1781024490302
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "carga_id": 4,
+          "temperatura": 12.5,
+          "umidade": 55.0,
+          "risco": "MEDIO"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/alertas/2
+    name: POST Criar Alerta
+    meta:
+      id: req_817397cff47d4c3f9dc156e389cf4a9d
+      created: 1781024552791
+      modified: 1781051111952
+      isPrivate: false
+      description: ""
+      sortKey: -1781024552791
+    method: PUT
+    body:
+      mimeType: application/json
+      text: >-
+        {
+          "cargaId": 4,
+          "titulo": "Oscilação de Temperatura",
+          "descricao": "A temperatura da carga atingiu o limite de alerta amarelo.",
+          "nivel": "ALERTA",
+          "status": "RESOLVIDO"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/cargas
+    name: GET Listar Cargas
+    meta:
+      id: req_f7bc61de0cce4d31be8b9a005079df17
+      created: 1781024618425
+      modified: 1781045985971
+      isPrivate: false
+      description: ""
+      sortKey: -1781024618425
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.6.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcmJpZnJlaWdodC1hcGkiLCJzdWIiOiJtYXJpYUBvcmJpZnJlaWdodC5jb20iLCJleHAiOjE3ODEwNjMyNzZ9.8Kuaps-88PcrQI6d6nAAKogYKuv66vymATYomNsGVzg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_3abb159378080a06c3a5f3e4d40c56d968d5e33b
+    created: 1781019491144
+    modified: 1781019491144
+environments:
+  name: Base Environment
+  meta:
+    id: env_3abb159378080a06c3a5f3e4d40c56d968d5e33b
+    created: 1781019491135
+    modified: 1781019491135
+    isPrivate: false
