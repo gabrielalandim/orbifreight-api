@@ -25,7 +25,7 @@
 | 🚀 **Deploy (API em produção)** | [https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net](https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net) |
 | 📖 **Documentação Swagger/OpenAPI** | [https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/swagger-ui/index.html](https://orbifreight-bud3csaaadddfxdq.eastus-01.azurewebsites.net/swagger-ui/index.html) |
 | 🎬 **Vídeo Pitch (3 minutos)** | [https://youtu.be/lgvnZS5-yeg](https://youtu.be/lgvnZS5-yeg) |
-| 🎥 **Vídeo de Apresentação (10 minutos)** | `[LINK AQUI — Inserir após upload]` |
+| 🎥 **Vídeo de Apresentação (10 minutos)** | [https://youtu.be/-CYGdHebzt8?si=DAfZRWNAL8H0eaQq](https://youtu.be/-CYGdHebzt8?si=DAfZRWNAL8H0eaQq) |
 | 💻 **Repositório GitHub** | [https://github.com/gabrielalandim/orbifreight-api](https://github.com/gabrielalandim/orbifreight-api) |
 
 ---
